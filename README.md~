@@ -1,0 +1,19 @@
+# Flash Tool
+- Make sure the expect tool is installed.
+- Download openwrt-ap3610-ramboot.bin and place it in the tftp server dir.
+- Download openwrt-ap3610-sysupgrade.bin and place it the http server dir.
+- `./flash3610.exo`
+
+```
+  services.atftpd = {
+    enable = true;
+    root = "/var/tftp";
+  };
+
+  services.nginx = {
+    enable = true;
+    virtualHosts."fe80::changme" = {
+      root = "/var/tftp";
+    };
+  };
+```

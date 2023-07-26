@@ -11,7 +11,7 @@ set hostip $::env(HOSTIP)
 
 set baudrate 115200
 
-send_user "\n======== Please press enter, after stoping the device.\n"
+send_user "\n======== Please press enter, after stoping the device, and make sure that the seriell connector is connected to the pc\n"
 expect_user "\r"
 
 #spawn picocom /dev/ttyUSB0 -b 115200 -g picocom.log
@@ -79,7 +79,7 @@ sleep 20
 send -s "until ping -c1 \"$hostip%br-lan\" >/dev/null 2>&1; do :; done\r"
 expect ":/#"
 
-send -s "cd /tmp && wget \"http://\[$hostip%br-lan\]/openwrt-ap3610-sysupgrade.bin\" && sysupgrade -n /tmp/openwrt-ap3610-sysupgrade.bin\r"
+send -s "cd /tmp && wget \"http://\[$hostip%br-lan\]:8000/openwrt-ap3610-sysupgrade.bin\" && sysupgrade -n /tmp/openwrt-ap3610-sysupgrade.bin\r"
 
 set timeout 300
 expect "Rebooting system..."
