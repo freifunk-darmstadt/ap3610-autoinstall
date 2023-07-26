@@ -7,7 +7,6 @@ log_file log.log
 #set device "/dev/ttyUSB0"
 #set device "/dev/ttyACM1"
 set device $::env(DEVICE)
-set apip $::env(APIP)
 set hostip $::env(HOSTIP)
 
 set baudrate 115200
