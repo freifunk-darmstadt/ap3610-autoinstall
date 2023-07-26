@@ -15,7 +15,7 @@ set baudrate 115200
 set timeout 120
 
 send_user "\n======== Please press enter, after stoping the device, and make sure that the seriell connector is connected to the pc\n"
-expect_user "\r"
+expect_user "\n"
 
 #spawn picocom /dev/ttyUSB0 -b 115200 -g picocom.log
 spawn picocom $device -b  115200 -g picocom.log
