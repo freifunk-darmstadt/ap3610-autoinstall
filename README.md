@@ -8,6 +8,7 @@
 - To setup an tftp server install tftpd-hpa. `systemctl start tftpd-hpa.service`. Move the `openwrt-ap3610-ramboot.bin` to `/srv/tftp/`.
 - export DEVICE=/dev/ttyUSB0
 - export HOSTIP=192.168.1.66 (HTTP Server IP)
+- export APIP=192.168.1.101 (Change this if you flash multiple APs at the same time.)
 - Connect the serial adapter, and leave it conected.
 - `./flash3610.exo`
 - Follow the instructions.

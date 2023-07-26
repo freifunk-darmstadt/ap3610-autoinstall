@@ -8,8 +8,11 @@ log_file log.log
 #set device "/dev/ttyACM1"
 set device $::env(DEVICE)
 set hostip $::env(HOSTIP)
+set apip $::env(APIP)
 
 set baudrate 115200
+
+set timeout 120
 
 send_user "\n======== Please press enter, after stoping the device, and make sure that the seriell connector is connected to the pc\n"
 expect_user "\r"
