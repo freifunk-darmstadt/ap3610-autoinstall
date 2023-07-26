@@ -10,8 +10,6 @@ set device $::env(DEVICE)
 set apip $::env(APIP)
 set hostip $::env(HOSTIP)
 
-set sysupgrade_file "gluon-ffda-2.6.3_20230622-hh36-siemens-ws-ap3610-sysupgrade.bin"
-
 set baudrate 115200
 
 send_user "\n======== Please press enter, after stoping the device.\n"
@@ -20,8 +18,6 @@ expect_user "\r"
 #spawn picocom /dev/ttyUSB0 -b 115200 -g picocom.log
 spawn picocom $device -b  115200 -g picocom.log
 # script -f log.sc ./x
-
-# cu -l $device -s $baudrate | tee ./log.cu
 
 send_user "\n========= Don't connect the device yet\n"
 
@@ -48,7 +44,7 @@ send -s "setenv boot_openwrt 'setenv bootargs; bootm 0xbf080000'\r"
 expect "Boot->"
 
 sleep 1
-send -s "setenv ramboot_openwrt 'setenv serverip 192.168.1.66; tftpboot 0x80100000 1501A8C0.img; bootm'\r"
+send -s "setenv ramboot_openwrt 'setenv serverip 192.168.1.66; tftpboot 0x80100000 openwrt-ap3610-ramboot.bin; bootm'\r"
 expect "Boot->"
 
 sleep 1
@@ -84,7 +80,7 @@ sleep 20
 send -s "until ping -c1 \"$hostip%br-lan\" >/dev/null 2>&1; do :; done\r"
 expect ":/#"
 
-send -s "cd /tmp && wget \"http://\[$hostip%br-lan\]/gluon-ffda-2.6.3_20230622-hh36-siemens-ws-ap3610-sysupgrade.bin\" && sysupgrade -n /tmp/gluon-ffda-2.6.3_20230622-hh36-siemens-ws-ap3610-sysupgrade.bin\r"
+send -s "cd /tmp && wget \"http://\[$hostip%br-lan\]/openwrt-ap3610-sysupgrade.bin\" && sysupgrade -n /tmp/openwrt-ap3610-sysupgrade.bin\r"
 
 set timeout 300
 expect "Rebooting system..."
